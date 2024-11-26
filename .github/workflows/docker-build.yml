@@ -1,11 +1,12 @@
-name: Build and Scan Docker Image
+name: Build, Scan, and Push to ECR
 
 on:
   push:
     branches:
-      - '*'
+      - '*'  
   pull_request:
-
+  workflow_dispatch:  
+  
 jobs:
   build-and-scan:
     runs-on: ubuntu-latest
@@ -14,12 +15,29 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-2
+
+    - name: Login to Amazon ECR
+      run: |
+        aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 992382674979.dkr.ecr.eu-west-2.amazonaws.com
+
     - name: Build Docker Image
-      run: docker build -t 2048 .
+      run: docker build -t 2048-repo .
+
+    - name: Tag Docker Image
+      run: docker tag 2048-repo:latest 992382674979.dkr.ecr.eu-west-2.amazonaws.com/2048-repo:latest
+
+    - name: Push Docker Image to ECR
+      run: docker push 992382674979.dkr.ecr.eu-west-2.amazonaws.com/2048-repo:latest
 
     - name: Run Container
       run: |
-        docker run --rm -d -p 3000:3000 --name 2048-container 2048
+        docker run --rm -d -p 3000:3000 --name 2048-container 2048-repo
         sleep 5
         curl -f http://localhost:3000 || (echo "Container failed to start" && exit 1)
 
@@ -30,6 +48,6 @@ jobs:
     - name: Scan Docker Image with Trivy
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 2048
+        image-ref: 992382674979.dkr.ecr.eu-west-2.amazonaws.com/2048-repo:latest
         format: 'table'
         severity: 'CRITICAL,HIGH'
