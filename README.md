@@ -13,6 +13,7 @@ This project was undertaken to deploy the 2048 game as a cloud-native applicatio
 ## Table Of Contents  📑
 - [Tech Stack ](#tech-stack)
 - [Local App Set Up ](#local-app-set-up)
+- [Demo](#Demo)
 - [Docker Setup](#docker-setup)
 - [Dockerfile Explanation](#Dockerfile-Explanation)
 - [Jira Board Workflow](#Jira-Board-Workflow)
@@ -68,6 +69,10 @@ python -m http.server 3000
 http://localhost:3000/
 ```
 - When running the previous command, it allows you to access your app in a browser via http://localhost:3000, serving any files in the current directory or subdirectories. 
+
+## Demo 🎬
+![Gif Description](https://media.giphy.com/media/4t2wiyP0uoFOIk2aOJ/giphy.gif)
+
 ## Docker Setup 🐳
 
 ```
