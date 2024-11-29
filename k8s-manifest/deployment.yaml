@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beta-deployment
+  labels:
+    app: beta
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: beta
+  template:
+    metadata:
+      labels:
+        app: beta
+    spec:
+      containers:
+      - name: beta
+        image: 992382674979.dkr.ecr.eu-west-2.amazonaws.com/2048-repo:latest
+        ports:
+        - containerPort: 3000
+       
