@@ -44,6 +44,14 @@ variable "public_subnet2_cidr" {
   default = "10.0.32.0/24"
 }
 
+
+
+variable "tm_cidr" {
+type         = string
+description  = "This is the name for our cluster"
+default      = "0.0.0.0/0"
+}
 variable "zone_3" {
   default = "eu-west-2b"
 }
+
