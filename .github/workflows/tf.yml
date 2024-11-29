@@ -1,11 +1,6 @@
 name: Terraform pipeline
 
 on:
-  push:
-    branches:
-      - main
-
-on:
   workflow_dispatch:  
     inputs:
       environment:
