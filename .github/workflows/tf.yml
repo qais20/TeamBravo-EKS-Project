@@ -1,4 +1,4 @@
-name: Terraform pipeline
+name: Terraform pipeline 
 
 on:
   workflow_dispatch:
