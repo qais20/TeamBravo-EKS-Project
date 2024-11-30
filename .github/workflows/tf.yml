@@ -1,50 +1,49 @@
 name: Terraform pipeline
 
 on:
-    workflow_dispatch:
-      inputs:
-        confirmation:
-          description: 'Type "yes" to confirm deployment'
-          required: true
-          default: 'no'
-    
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Type "yes" to confirm deployment'
+        required: true
+        default: 'no'
+
 jobs:
   terraform:
-    - name: initialise, plan, validate, apply
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest # `runs-on` was misplaced
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-west-2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install tfsec
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+
+      - name: Install tfsec
         run: curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | bash
-    - name: Run tfsec
-        run: tfsec .  
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version:  1.9.8
+      - name: Run tfsec
+        run: tfsec .
 
-    - name: Terraform Plan Execution 
-      run: Terraform plan -lock=false
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.9.8
 
-    - name: Terraform Init Execution
-      run: terraform init
-      env:
-    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # This if for the remote backend "remote-backend21"
+      - name: Terraform Init Execution
+        run: terraform init
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # This is for the remote backend
 
-    - name: Terraform Validate Execution
-      run: terraform validate
+      - name: Terraform Plan Execution
+        run: terraform plan -lock=false
 
-    - name: Terraform Apply Execution
-      run: Terraform apply -lock=false
+      - name: Terraform Validate Execution
+        run: terraform validate
+
+      - name: Terraform Apply Execution
+        run: terraform apply -lock=false
