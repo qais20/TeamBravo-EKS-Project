@@ -1,12 +1,12 @@
 name: Terraform pipeline
 
 on:
-  workflow_dispatch:  
-    inputs:
-      environment:
-        description: "Environment to deploy to repo"
-        required: true
-        default: "staging"
+    workflow_dispatch:
+      inputs:
+        confirmation:
+          description: 'Type "yes" to confirm deployment'
+          required: true
+          default: 'no'
     
 jobs:
   terraform:
@@ -35,7 +35,7 @@ jobs:
         terraform_version:  1.9.8
 
     - name: Terraform Plan Execution 
-      run: terraform plan
+      run: Terraform plan -lock=false
 
     - name: Terraform Init Execution
       run: terraform init
@@ -47,4 +47,4 @@ jobs:
       run: terraform validate
 
     - name: Terraform Apply Execution
-      run: terraform apply -auto-approve
+      run: Terraform apply -lock=false
