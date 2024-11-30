@@ -1,0 +1,17 @@
+provider: aws 
+
+env:
+- name: AWS_DEFAULT_REGION
+  value: eu-west-2
+
+# serviceAccount:
+#   annotations:
+#     eks.amazonaws.com/role-arn: # you need the arn for the cert manager on aws
+
+# serviceAccount:
+#   annotations:
+#     eks.amazonaws.com/role-arn: # you need the arn for the external dns on aws 
+
+# domainFilters:
+# - labs.abdul.yusuf.co.uk "this is an example"
+# you need to add your domain name from route53, this tells external dns that you want it to only control this domain for now, if there is any ingress service that has this domain, it can have access to it.  
