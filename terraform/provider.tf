@@ -1,15 +1,16 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.77.0"
-    }
-  }
-}
+# terraform {
+# required_providers {
+#    aws = {
+#      source  = "hashicorp/aws"
+#      version = "5.77.0"
+#    }
+#  }
+# }
 
-provider "aws" {
+# provider "aws" {
+# <<<<<<< ali-terraform
   
-}
+#}
 
 # data "aws_eks_cluster" "cluster" {
 #   name = module.eks.cluster_name
@@ -26,3 +27,7 @@ provider "aws" {
 #     }
 #   }
 # }
+# =======
+
+# }
+# >>>>>>> Main
