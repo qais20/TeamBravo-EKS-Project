@@ -19,7 +19,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS }}
           aws-region: eu-west-2
 
@@ -31,7 +31,7 @@ jobs:
       - name: Terraform Init Execution
         run: terraform init
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS: ${{ secrets.AWS_SECRET_ACCESS }}
 
       - name: Terraform Validate Execution
@@ -46,5 +46,5 @@ jobs:
       - name: Terraform Destroy Execution
         run: terraform destroy -auto-approve
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS: ${{ secrets.AWS_SECRET_ACCESS }}
