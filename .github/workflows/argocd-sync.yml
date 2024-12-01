@@ -1,0 +1,41 @@
+name: ArgoCD Sync Pipeline
+
+on:
+  push:
+    branches:
+      - Main
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Type "yes" to confirm deployment'
+        required: true
+        default: 'no'
+
+jobs:
+  sync:
+    if: ${{ inputs.confirmation == 'yes' || github.event_name == 'push' }} 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install ArgoCD CLI
+        run: |
+          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.13.1/argocd-linux-amd64
+          chmod +x /usr/local/bin/argocd
+
+      - name: Login to ArgoCD
+        env:
+          ARGOCD_SERVER: argocd.tm.najiib.co.uk 
+          ARGOCD_USERNAME: admin                
+          ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }} 
+        run: |
+          argocd login $ARGOCD_SERVER \
+            --username $ARGOCD_USERNAME \
+            --password $ARGOCD_PASSWORD \
+            --insecure
+
+      - name: Sync Application
+        run: |
+          argocd app sync team-bravo

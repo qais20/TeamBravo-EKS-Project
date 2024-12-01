@@ -1,0 +1,17 @@
+server:
+  service:
+    type: LoadBalancer
+  ingress:
+    enabled: true
+    hosts:
+      - argocd.tm.najiib.co.uk
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+  config:
+    url: https://argocd.tm.najiib.co.uk
+
+redis:
+  enabled: true
+
+controller:
+  replicas: 2
