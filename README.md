@@ -13,10 +13,11 @@ This project was undertaken to deploy the 2048 game as a cloud-native applicatio
 ## Table Of Contents  📑
 - [Tech Stack ](#tech-stack)
 - [Local App Set Up ](#local-app-set-up)
+- [Architectural Diagram](#Architectural-Diagram)
 - [Demo](#Demo)
+- [trello Board workflow](#trello-board-workflow)
 - [Docker Setup](#docker-setup)
 - [Dockerfile Explanation](#Dockerfile-Explanation)
-- [Jira Board Workflow](#Jira-Board-Workflow)
 - [Contributors ](#contributors)
 - [License ](#license)
 
@@ -69,9 +70,17 @@ python -m http.server 3000
 http://localhost:3000/
 ```
 - When running the previous command, it allows you to access your app in a browser via http://localhost:3000, serving any files in the current directory or subdirectories. 
+  
+## Architectural diagram 🖼️📐
 
 ## Demo 🎬
 ![Gif Description](https://media.giphy.com/media/4t2wiyP0uoFOIk2aOJ/giphy.gif)
+
+## Trello Board Workflow ✅
+
+![alt text](image-1.png)
+
+This Trello board is an EKS Project Workflow designed to manage tasks effectively across different stages of the development process. It features columns for Backlog, In Progress, PR Reviews, and Done, ensuring a clear workflow from task initiation to completion. Each card represents specific tasks, such as setting up EKS clusters, deploying NGINX controllers, or configuring CI/CD pipelines, assigned to team members for collaboration and accountability. The structure supports seamless tracking of progress and prioritization.
 
 ## Docker Setup 🐳
 
