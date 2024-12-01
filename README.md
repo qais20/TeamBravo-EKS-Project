@@ -76,6 +76,8 @@ http://localhost:3000/
   
 ## Architectural diagram 🖼️📐
 
+![alt text](image-2.png)
+
 ## Demo 🎬
 ![Gif Description](https://media.giphy.com/media/4t2wiyP0uoFOIk2aOJ/giphy.gif)
 
