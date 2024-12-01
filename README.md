@@ -16,6 +16,9 @@ This project was undertaken to deploy the 2048 game as a cloud-native applicatio
 - [Architectural Diagram](#Architectural-Diagram)
 - [Demo](#Demo)
 - [trello Board workflow](#trello-board-workflow)
+- [Prometheus](#Prometheus)
+- [Grafana](#Grafana)
+- [ArgoCD](#ArgoCD)
 - [Docker Setup](#docker-setup)
 - [Dockerfile Explanation](#Dockerfile-Explanation)
 - [Contributors ](#contributors)
@@ -78,11 +81,17 @@ http://localhost:3000/
 
 ## Trello Board Workflow ✅
 
+## Prometheus 🔥
+
+## Grafana 📈
+
+## ArgoCD 🎯
+
 ![alt text](image-1.png)
 
 This Trello board is an EKS Project Workflow designed to manage tasks effectively across different stages of the development process. It features columns for Backlog, In Progress, PR Reviews, and Done, ensuring a clear workflow from task initiation to completion. Each card represents specific tasks, such as setting up EKS clusters, deploying NGINX controllers, or configuring CI/CD pipelines, assigned to team members for collaboration and accountability. The structure supports seamless tracking of progress and prioritization.
 
-## Docker Setup 🐳
+## Docker Setup 🐳 
 
 ```
  docker build -t 2048-repo . 
