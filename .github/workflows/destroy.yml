@@ -17,22 +17,23 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.9.8
+          terraform_version: 1.5.8
 
       - name: Terraform Init Execution
         run: terraform init
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS: ${{ secrets.AWS_SECRET_ACCESS }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: eu-west-2
 
       - name: Terraform Validate Execution
         run: terraform validate
@@ -40,11 +41,12 @@ jobs:
       - name: Wait for confirmation before destroying
         if: ${{ github.event.inputs.confirmation != 'yes' }}
         run: |
-          echo "Please type 'yes' to confirm destroying the infrastructure"
+          echo "Confirmation not provided. Please type 'yes' to confirm destroying the infrastructure."
           exit 1
 
       - name: Terraform Destroy Execution
         run: terraform destroy -auto-approve
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS: ${{ secrets.AWS_SECRET_ACCESS }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: eu-west-2
