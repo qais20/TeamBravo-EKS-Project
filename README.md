@@ -85,7 +85,7 @@ http://localhost:3000/
 
 ## Grafana 📈
 
-## ArgoCD 🎯  
+## ArgoCD 🎯   
 
 ![alt text](image-1.png)
 
